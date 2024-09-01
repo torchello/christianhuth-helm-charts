@@ -105,7 +105,10 @@ data:
         compression={{ (int $element.compression) | default 0 }}
         max_connections={{ $element.maxConnections | default 1000 }}
         max_replication_lag={{ $element.maxReplicationLag | default 0 }}
-        use_ssl=0
+        use_ssl={{ $element.useSsl | default 0 }}
+        ssl_ca="{{ $element.sslCa | default "" }}"
+        ssl_cert="{{ $element.sslCert | default "" }}"
+        ssl_key="{{ $element.sslKey | default "" }}"
       }{{- if lt (add1 $index) $totalServers -}},{{- end -}}
       {{- end }}
     )
