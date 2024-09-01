@@ -55,6 +55,10 @@ spec:
           mountPath: /etc/proxysql.cnf
           subPath: proxysql.cnf
           readOnly: true
+        - name: ca-cert-volume
+          mountPath: /etc/ca.pem
+          subPath: ca.pem
+          readOnly: true
       {{- if and .Values.proxysql.cluster.enabled .Values.proxysql.cluster.claim.enabled }}
         - name: {{ include "proxysql.fullname" . }}-pv
           mountPath: /var/lib/proxysql
@@ -62,6 +66,9 @@ spec:
       resources:
         {{- toYaml .Values.resources | nindent 8 }}
   volumes:
+    - name: ca-cert-volume
+      secret:
+        secretName: singlestore-ca-cert-secret
     - name: proxysql-config
       configMap:
         name: {{ .Values.proxysql.configmap | default (include "proxysql.fullname" .) }}
