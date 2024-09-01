@@ -149,7 +149,7 @@ data:
       {
         username="{{ required "mysql username is required!" $element.username }}"
         password="{{ required "mysql passowrd is required!" $element.password }}"
-        use_ssl=0
+        use_ssl={{ $element.useSsl | default 0 }}
         default_hostgroup={{ (add1 (int $element.readOnly | default 0)) }}
         transaction_persistent=1
         active=1
