@@ -22,6 +22,7 @@ data:
     }
     mysql_variables=
     {
+      multiplexing=true
       interfaces="0.0.0.0:{{ .Values.proxysql.mysql.port }}"
       connect_timeout_server=1500
       connect_timeout_server_max=10000
